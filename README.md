@@ -1,4 +1,4 @@
-# Better Stack Traces in node
+# Better Stack Traces
 
 Ever find yourself digging line-by-line through a Javascript stack trace
 to find the "real" error?

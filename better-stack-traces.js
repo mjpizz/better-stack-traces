@@ -114,7 +114,7 @@ BetterStackTrace.prototype = {
     // Collect formatted versions of all the lines. Render
     var formattedLines = [];
     var maxLineNumber = lineNumber + this._linesAfter;
-    var currentLineNumber = lineNumber - this._linesBefore + 2;
+    var currentLineNumber = lineNumber - this._linesBefore;
     function renderLines(lines) {
       while (lines.length) {
         formattedLines.push(this._formatCodeLine(

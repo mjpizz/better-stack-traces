@@ -6,9 +6,9 @@ to find the "real" error?
     Error: ENOENT, no such file or directory '/bad/file/path'
         at Object.openSync (fs.js:230:18)
         at Object.readFileSync (fs.js:120:15)
-        at readMyFile (/Users/mjpizz/Projects/better-stack-traces/example.js:10:6)
-        at doStuff (/Users/mjpizz/Projects/better-stack-traces/example.js:5:10)
-        at Object.<anonymous> (/Users/mjpizz/Projects/better-stack-traces/example.js:13:1)
+        at readMyFile (/path/to/some/code/example.js:10:6)
+        at doStuff (/path/to/some/code/example.js:5:10)
+        at Object.<anonymous> (/path/to/some/code/example.js:13:1)
         at Module._compile (module.js:441:26)
         at Object..js (module.js:459:10)
         at Module.load (module.js:348:31)
@@ -18,8 +18,8 @@ With `better-stack-traces`, you get inline code snippets instead:
     Error: ENOENT, no such file or directory '/bad/file/path'
         at Object.openSync (fs.js:230:18)
         at Object.readFileSync (fs.js:120:15)
-        at readMyFile (/Users/mjpizz/Projects/better-stack-traces/example.js:10:6)
-        ──────────────────────────────────────────────────────────────────────────
+        at readMyFile (/path/to/some/code/example.js:10:6)
+        ──────────────────────────────────────────────────
          8 » 
          9 » function readMyFile(filePath) {
         10 »   fs.readFileSync(filePath);
@@ -28,8 +28,8 @@ With `better-stack-traces`, you get inline code snippets instead:
         12 » 
         13 » doStuff(readMyFile)
         
-        at doStuff (/Users/mjpizz/Projects/better-stack-traces/example.js:5:10)
-        ───────────────────────────────────────────────────────────────────────
+        at doStuff (/path/to/some/code/example.js:5:10)
+        ───────────────────────────────────────────────
         3 » 
         4 » function doStuff(readCallback) {
         5 »   return readCallback("/bad/file/path");
@@ -38,8 +38,8 @@ With `better-stack-traces`, you get inline code snippets instead:
         7 » 
         8 » 
         
-        at Object.<anonymous> (/Users/mjpizz/Projects/better-stack-traces/example.js:13:1)
-        ──────────────────────────────────────────────────────────────────────────────────
+        at Object.<anonymous> (/path/to/some/code/example.js:13:1)
+        ──────────────────────────────────────────────────────────
         11 » }
         12 » 
         13 » doStuff(readMyFile)

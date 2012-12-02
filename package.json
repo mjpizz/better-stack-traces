@@ -1,0 +1,14 @@
+{
+    "name": "better-stack-traces",
+    "description": "Detailed stack traces with code snippets.",
+    "version": "0.0.1",
+    "author": "Matt Pizzimenti",
+    "url": "https://github.com/mjpizz/better-stack-traces",
+    "repository": {
+        "url": "https://github.com/mjpizz/better-stack-traces"
+    },
+    "dependencies": {
+      "coffee-script": "*"
+    },
+    "main": "./better-stack-traces"
+}

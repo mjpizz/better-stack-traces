@@ -1,7 +1,7 @@
 {
     "name": "better-stack-traces",
     "description": "Detailed stack traces with code snippets.",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "author": "Matt Pizzimenti",
     "url": "https://github.com/mjpizz/better-stack-traces",
     "repository": {

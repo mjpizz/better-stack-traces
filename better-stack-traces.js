@@ -251,7 +251,7 @@ function install(callback) {
   if (typeof callback !== "function") {
     var options = callback;
     callback = function(error, frames) {
-      return new BetterStackTrace(error, frames, options)
+      return new BetterStackTrace(error, frames, options).toString();
     };
   }
   if (Error.prepareStackTrace) {

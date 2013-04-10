@@ -21,15 +21,18 @@ function fallback(value, fallbackValue) {
   return typeof value === "undefined" ? fallbackValue : value;
 }
 
+// One shared file cache to avoid repeatedly reading files
+var fileCache = {};
+
 /*
 /path/to/your/code.js
 ─────────────────────
-189 » 
+189 »
 190 » function bar(x) {
 191 »   throw new Error("x: " + x)
 •••••••••••••••
 192 » }
-193 » 
+193 »
 194 » foo(bar)
 */
 function BetterStackTrace(error, frames, opt) {
@@ -38,7 +41,6 @@ function BetterStackTrace(error, frames, opt) {
 
   // Initialize caches.
   this._outCache = null;
-  this._fileCache = {};
 
   // Parse flags.
   opt = opt || {};
@@ -65,13 +67,13 @@ BetterStackTrace.prototype = {
   },
 
   _readCode: function _readCode(fileName) {
-    var code = this._fileCache[fileName];
+    var code = fileCache[fileName];
     if (!code) {
       code = this._fs.readFileSync(fileName).toString();
       if (/\.coffee$/.test(fileName)) {
         code = this._compileCoffeScript(code);
       }
-      this._fileCache[fileName] = code;
+      fileCache[fileName] = code;
     }
     return code;
   },

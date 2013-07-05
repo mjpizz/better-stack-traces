@@ -64,13 +64,6 @@ rendering the trace.  Maybe someday we will have
 [line number mapping](https://github.com/jashkenas/coffee-script/issues/558),
 but until then better stack traces might help your sanity :)
 
-## Using better-stack-traces with Mocha tests
-
-If you use [Mocha](http://visionmedia.github.com/mocha/) for testing, you can
-get better traces using:
-
-    mocha --require better-stack-traces
-
 ## Customizing the output
 
 Stack traces not quite better enough?  There are a few options to tweak the

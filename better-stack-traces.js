@@ -275,7 +275,4 @@ exp.install = install;
 exp.uninstall = uninstall;
 exp.BetterStackTrace = BetterStackTrace;
 
-// Install automatically.
-install();
-
 }).call(this);

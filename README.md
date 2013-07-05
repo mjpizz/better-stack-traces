@@ -52,7 +52,7 @@ With `better-stack-traces`, you get inline code snippets instead:
 # Usage
 
 1. Install the module using `npm install better-stack-traces`
-2. At the top of your code, `require("better-stack-traces")`
+2. At the top of your code, `require("better-stack-traces").install()`
 3. Enjoy easier-to-read stack traces
 
 ## Using better-stack-traces with CoffeeScript
@@ -81,7 +81,7 @@ require("better-stack-traces").install({
   before: 2, // number of lines to show above the error
   after: 3, // number of lines to show below the error
   maxColumns: 80, // maximum number of columns to output in code snippets
-  collapseLibraries: true, // omit code snippets from node_modules
+  collapseLibraries: true // omit code snippets from node_modules
 })
 ```
 

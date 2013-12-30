@@ -10,6 +10,7 @@ var ELLIPSIS_CHAR = "…";
 var EMDASH_CHAR = "─";
 var ERR_FILE_NOT_EXIST = "ENOENT";
 var NOOP = function() {};
+var DEFAULT_LIBRARY_REGEX = /node_modules/;
 
 // Helper for generating a repeated string.
 function repeatString(repeat, length) {
@@ -42,7 +43,7 @@ function BetterStackTrace(error, frames, opt) {
 
   // Parse flags.
   opt = opt || {};
-  this._collapseLibraries = fallback(opt.collapseLibraries, /node_modules/);
+  this._collapseLibraries = fallback(opt.collapseLibraries, DEFAULT_LIBRARY_REGEX);
   this._linesBefore = fallback(opt.before, LINES_BEFORE);
   this._linesAfter = fallback(opt.after, LINES_AFTER);
   this._maxColumns = opt.maxColumns || MAX_COLUMNS;
@@ -62,6 +63,18 @@ BetterStackTrace.prototype = {
   toString: function toString() {
     this._outCache = this._outCache || this._format(this.error, this.frames);
     return this._outCache;
+  },
+
+  _shouldCollapse: function _shouldCollapse(fileName) {
+    if (this._collapseLibraries) {
+      if (this._collapseLibraries.test) {
+        return this._collapseLibraries.test(fileName);
+      } else {
+        return DEFAULT_LIBRARY_REGEX.test(fileName);
+      }
+    } else {
+      return false;
+    }
   },
 
   _readCode: function _readCode(fileName) {
@@ -187,7 +200,7 @@ BetterStackTrace.prototype = {
             fileLocation += ":" + columnNumber;
           }
           try {
-            if (this._collapseLibraries && this._collapseLibraries.test(fileName)) {
+            if (this._shouldCollapse(fileName)) {
               context = null;
             } else {
               context = this._formatContext(fileName, lineNumber, columnNumber);

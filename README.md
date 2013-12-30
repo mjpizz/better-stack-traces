@@ -88,3 +88,8 @@ If you find `better-stack-traces` useful, you might be interested in these:
 * [V8 Stack Trace API](http://code.google.com/p/v8/wiki/JavaScriptStackTraceApi)
 * [Tips for V8 stack formatting](http://www.devthought.com/2011/12/22/a-string-is-not-an-error/)
 * [Long stack traces](https://github.com/tlrobinson/long-stack-traces) (for event handlers)
+
+# Contributors
+
+- Wilker Lúcio (wilkerlucio)
+  - allow regex for `collapseLibraries`

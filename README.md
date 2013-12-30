@@ -74,7 +74,7 @@ require("better-stack-traces").install({
   before: 2, // number of lines to show above the error
   after: 3, // number of lines to show below the error
   maxColumns: 80, // maximum number of columns to output in code snippets
-  collapseLibraries: true // omit code snippets from node_modules
+  collapseLibraries: /node_modules/ // omit code snippets from paths that match the given regexp (ignores node_modules by default)
 })
 ```
 

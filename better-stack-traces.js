@@ -42,7 +42,7 @@ function BetterStackTrace(error, frames, opt) {
 
   // Parse flags.
   opt = opt || {};
-  this._collapseLibraries = fallback(opt.collapseLibraries, true);
+  this._collapseLibraries = fallback(opt.collapseLibraries, /node_modules/);
   this._linesBefore = fallback(opt.before, LINES_BEFORE);
   this._linesAfter = fallback(opt.after, LINES_AFTER);
   this._maxColumns = opt.maxColumns || MAX_COLUMNS;
@@ -187,7 +187,7 @@ BetterStackTrace.prototype = {
             fileLocation += ":" + columnNumber;
           }
           try {
-            if (this._collapseLibraries && /node_modules/.test(fileName)) {
+            if (this._collapseLibraries && this._collapseLibraries.test(fileName)) {
               context = null;
             } else {
               context = this._formatContext(fileName, lineNumber, columnNumber);

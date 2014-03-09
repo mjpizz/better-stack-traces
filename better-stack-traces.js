@@ -276,7 +276,7 @@ BetterStackTrace.prototype = {
 // Helpers for installing and uninstalling stack trace handlers.
 var installations = [];
 
-function install(callback) {
+function register(callback) {
   if (typeof callback !== "function") {
     var options = callback;
     callback = function(error, frames) {
@@ -289,7 +289,7 @@ function install(callback) {
   Error.prepareStackTrace = callback;
 }
 
-function uninstall() {
+function unregister() {
   if (Error.prepareStackTrace) {
     delete Error.prepareStackTrace;
   }
@@ -300,8 +300,10 @@ function uninstall() {
 
 // Export for browser and node.
 var exp = typeof exports === "undefined" ? (this.BetterStackTraces = {}) : exports;
-exp.install = install;
-exp.uninstall = uninstall;
+exp.register = register;
+exp.unregister = unregister;
+exp.install = register; // deprecated
+exp.uninstall = unregister; // deprecated
 exp.BetterStackTrace = BetterStackTrace;
 
 }).call(this);

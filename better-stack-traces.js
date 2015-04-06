@@ -54,7 +54,11 @@ function BetterStackTrace(error, frames, opt) {
   var req = opt.require || (typeof require === "undefined" ? NOOP : require);
   var win = opt.window || (typeof window === "undefined" ? {} : window);
   this._fs = opt.fs || req("fs") || win.fs;
-  this._coffee = opt.coffee || req("coffee-script") || win.CoffeeScript;
+  try {
+    this._coffee = opt.coffee || req("coffee-script") || win.CoffeeScript;
+  } catch(err) {
+    this._coffee = null;
+  }
 }
 
 BetterStackTrace.prototype = {
@@ -82,7 +86,11 @@ BetterStackTrace.prototype = {
     if (!code) {
       code = this._fs.readFileSync(fileName).toString();
       if (/\.coffee$/.test(fileName)) {
-        code = this._compileCoffeScript(code);
+        if (this._coffee) {
+          code = this._compileCoffeScript(code);
+        } else {
+          throw new Error("CoffeeScript compiler unavailable, did you include it in your dependencies?");
+        }
       }
       this._fileCache[fileName] = code;
     }
@@ -117,7 +125,15 @@ BetterStackTrace.prototype = {
   _formatContext: function _formatContext(fileName, lineNumber, columnNumber) {
 
     // Attempt to read the file, compiling to CoffeeScript if needed.
-    var code = this._readCode(fileName);
+    // Show errors if there is a problem reading the code.
+    try {
+      var code = this._readCode(fileName);
+    } catch(err) {
+      if (err.code === ERR_FILE_NOT_EXIST) {
+        throw err;
+      }
+      return this._outputPrefix + err.toString();
+    }
 
     // Figure out the lines of context before and after.
     var lines = code.split("\n");

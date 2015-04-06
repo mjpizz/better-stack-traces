@@ -87,7 +87,7 @@ BetterStackTrace.prototype = {
       code = this._fs.readFileSync(fileName).toString();
       if (/\.coffee$/.test(fileName)) {
         if (this._coffee) {
-          code = this._compileCoffeScript(code);
+          code = this._compileCoffeeScript(code);
         } else {
           throw new Error("CoffeeScript compiler unavailable, did you include it in your dependencies?");
         }
@@ -97,7 +97,7 @@ BetterStackTrace.prototype = {
     return code;
   },
 
-  _compileCoffeScript: function _compileCoffeScript(code) {
+  _compileCoffeeScript: function _compileCoffeeScript(code) {
     if (this._coffee) {
       return this._coffee.compile(code);
     } else {

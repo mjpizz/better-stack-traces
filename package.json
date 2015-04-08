@@ -7,7 +7,7 @@
     "repository": {
         "url": "https://github.com/mjpizz/better-stack-traces"
     },
-    "dependencies": {
+    "optionalDependencies": {
       "coffee-script": "*"
     },
     "main": "./better-stack-traces"

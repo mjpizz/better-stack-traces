@@ -54,7 +54,7 @@ With `better-stack-traces`, you get inline code snippets instead:
 1. Install the module using `npm install better-stack-traces`
 2. At the top of your code, `require("better-stack-traces").register()`
   * Alternatively, `require("better-stack-traces/register")`. This is useful for
-    tools that have commandline options like `--require` in [mocha](http://visionmedia.github.io/mocha/#usage).
+    tools that have commandline options like `--require` in [mocha](http://mochajs.org/#usage).
 3. Enjoy easier-to-read stack traces
 
 ## Using better-stack-traces with CoffeeScript
